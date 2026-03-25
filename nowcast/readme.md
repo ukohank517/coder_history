@@ -107,6 +107,20 @@ app-1  | [2026-03-25 05:04:17,135] INFO in app: FLAG: f1nat3xthd{f1096ca4-f298-4
 
 ### 問題3-3 HTTP - APIサーバーの構築(ローソク足) (16点)
 
+実行:
+```
+$ curl -X POST https://skill-test.st8.workers.dev/v1/q3-3/agent   -H "Content-Type: application/json"   -d '{"target":"https://nowcast.aikkou.com/"}'
+```
+
+ログは:
+```
+app-1  | 172.20.0.1 - - [25/Mar/2026 07:42:37] "GET /candle?code=SPCR&year=2021&month=12&day=22&hour=10 HTTP/1.1" 200 -
+app-1  | 172.20.0.1 - - [25/Mar/2026 07:42:37] "GET /candle?code=FTHD&year=2021&month=12&day=23&hour=10 HTTP/1.1" 200 -
+app-1  | 172.20.0.1 - - [25/Mar/2026 07:42:37] "GET /candle?code=TEQA&year=2021&month=12&day=27&hour=11 HTTP/1.1" 200 -
+app-1  | [2026-03-25 07:42:37,700] DEBUG in app: flag called
+app-1  | [2026-03-25 07:42:37,701] DEBUG in app: {'flag': 'f1nat3xthd{02f401fd-140e-4fe5-a7f5-29ff996139fc}'}
+app-1  | [2026-03-25 07:42:37,701] INFO in app: FLAG: f1nat3xthd{02f401fd-140e-4fe5-a7f5-29ff996139fc}
+```
 
 ### 問題4-1 Network - DKIM (8点)
 
