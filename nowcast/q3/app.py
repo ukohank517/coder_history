@@ -16,12 +16,10 @@ def build_candles():
     df["day"] = df["time"].dt.day
     df["hour"] = df["time"].dt.hour
 
-    # ソート（open/closeのため重要）
     df = df.sort_values("time")
 
     candles = {}
 
-    # groupbyで一発生成
     grouped = df.groupby(["code", "year", "month", "day", "hour"])
 
     for key, group in grouped:

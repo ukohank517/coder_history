@@ -3,7 +3,6 @@ from cryptography import x509
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
-# CA証明書（そのまま貼る）
 ca_pem = b"""-----BEGIN CERTIFICATE-----
 MIIDWDCCAkCgAwIBAgIUPKP/N0XCMOHsIvP7o8PvUNgTRfwwDQYJKoZIhvcNAQEL
 BQAwRDELMAkGA1UEBhMCSlAxDjAMBgNVBAcTBVRva3lvMREwDwYDVQQKEwhGaW5h
@@ -25,7 +24,6 @@ qZq84Nk0f9FPAP3hH8UeYvwufrm63GKfnQNQrhIZvIoKwSEZ3cpNuOSh3nl17JV8
 5TDLfm9xnezSBscQav49kZdmkK899TPtobrN0EJXZyfxpQNGm6ZBy1HxiOQ=
 -----END CERTIFICATE-----"""
 
-# CA証明書読み込み
 ca_cert = x509.load_pem_x509_certificate(ca_pem)
 ca_public_key = ca_cert.public_key()
 
@@ -38,7 +36,6 @@ for filename in os.listdir(cert_dir):
         with open(path, "rb") as f:
             cert = x509.load_pem_x509_certificate(f.read())
 
-        # 🔥 署名検証
         ca_public_key.verify(
             cert.signature,
             cert.tbs_certificate_bytes,
