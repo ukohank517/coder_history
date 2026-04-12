@@ -3,6 +3,7 @@
 ### 問題1-1 Container - コンテナの実行 (4点)
 
 dockerで、
+
 ```
 $ docker run --rm stajima/skill-test:v1_q1-1
 WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
@@ -14,7 +15,7 @@ M1マックで実行アーキテクチャが異なるのでwarning出てます�
 
 ### 問題1-2 Container - コンテナ上の任意のコマンドの実行 (8点)
 
-解法1: dockerに入って中身を直接確認:
+解法1: dockerに入って中身を直接確認(entrypointしないとechoコマンドが実行される):
 
 ```
 $ docker run --rm -it --entrypoint sh stajima/skill-test:v1_q1-2
@@ -80,7 +81,6 @@ VALID JWT FOUND:
 
 ### 問題3-1 HTTP - POSTリクエストの送信 (4点)
 
-
 ```
 $ curl -X POST https://skill-test.st8.workers.dev/v1/q3-1/login -H "Content-Type: application/json" -d '{"username":"admin","password":"supersecretpassword"}'
 {"token": "d97329d6c03c90a0c82bfec27e9427e796324861", "flag": "f1nat3xthd{8727d491-8190-4a3a-a937-d94a71d89c6c}"}(base)
@@ -89,6 +89,7 @@ $ curl -X POST https://skill-test.st8.workers.dev/v1/q3-1/login -H "Content-Type
 ### 問題3-2 HTTP - APIサーバーの構築(ログイン) (8点)
 
 動作確認:
+
 ```
 $ curl -X PUT localhost:8000/login -H "Content-Type: application/json" -d '{"username":"admin","password":"thisispassword"}'
 $ curl -X PUT https://nowcast.aikkou.com/login -H "Content-Type: application/json" -d '{"username":"admin","password":"thisispassword"}'
@@ -96,11 +97,13 @@ $ curl -X PUT https://nowcast.aikkou.com/login -H "Content-Type: application/jso
 ```
 
 実行:
+
 ```
 $ curl -X POST https://skill-test.st8.workers.dev/v1/q3-2/agent   -H "Content-Type: application/json"   -d '{"target":"https://nowcast.aikkou.com/"}'
 ```
 
 ログは：
+
 ```
 app-1  | [2026-03-25 05:04:17,135] INFO in app: FLAG: f1nat3xthd{f1096ca4-f298-464f-97e0-feedbe237f78}
 ```
@@ -108,11 +111,13 @@ app-1  | [2026-03-25 05:04:17,135] INFO in app: FLAG: f1nat3xthd{f1096ca4-f298-4
 ### 問題3-3 HTTP - APIサーバーの構築(ローソク足) (16点)
 
 実行:
+
 ```
 $ curl -X POST https://skill-test.st8.workers.dev/v1/q3-3/agent   -H "Content-Type: application/json"   -d '{"target":"https://nowcast.aikkou.com/"}'
 ```
 
 ログは:
+
 ```
 app-1  | 172.20.0.1 - - [25/Mar/2026 07:42:37] "GET /candle?code=SPCR&year=2021&month=12&day=22&hour=10 HTTP/1.1" 200 -
 app-1  | 172.20.0.1 - - [25/Mar/2026 07:42:37] "GET /candle?code=FTHD&year=2021&month=12&day=23&hour=10 HTTP/1.1" 200 -
